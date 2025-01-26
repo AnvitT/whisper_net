@@ -24,7 +24,7 @@ Follow these instructions to set up the project locally.
 1. Clone the repository:
     ```sh
     git clone https://github.com/AnvitT/whisper_net.git
-    cd whisper-net
+    cd whisper_net
     ```
 
 2. Install the dependencies:
@@ -38,6 +38,8 @@ Follow these instructions to set up the project locally.
         ```env
         NEXTAUTH_SECRET=your-secret
         MONGODB_URI=your-mongodb-uri
+        RESEND_API_KEY=your-resend-api-key
+        GEMINI_API_KEY=your-gemini-api-key
         ```
 
 4. Run the development server:
