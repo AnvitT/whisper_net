@@ -23,7 +23,7 @@ Follow these instructions to set up the project locally.
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/AnvitT/whisper-net.git
+    git clone https://github.com/AnvitT/whisper_net.git
     cd whisper-net
     ```
 
