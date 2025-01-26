@@ -54,3 +54,6 @@ Follow these instructions to set up the project locally.
 To build the project for production, run:
 ```sh
 npm run build
+
+## Credits
+I learned from this video: [Chai Aur Code](https://www.youtube.com/watch?v=zLJoVRleOuc&pp=ygUNY2hhaSBhdXIgY29kZQ%3D%3D)
