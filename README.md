@@ -56,6 +56,11 @@ To build the project for production, run:
 npm run build
 ```
 
+### Running in Production
+
+You can access the production version of Whisper Net at the following URL:
+[Whisper Net Production](https://whisper-net-peach.vercel.app/)
+
 #### Credits
 
 I learned from this video: [Chai Aur Code](https://www.youtube.com/watch?v=zLJoVRleOuc&pp=ygUNY2hhaSBhdXIgY29kZQ%3D%3D)
