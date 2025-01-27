@@ -66,7 +66,7 @@ function SignUp() {
     } catch (error) {
       console.error("Error signing up user ", error)
       const axiosError = error as AxiosError<ApiResponse>
-      let errorMessage = axiosError.response?.data.message ?? "Error checking username"
+      const errorMessage = axiosError.response?.data.message ?? "Error checking username"
       toast({
         title: "Signup failed",
         description: errorMessage,

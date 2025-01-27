@@ -9,7 +9,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import axios, { AxiosError } from 'axios'
 import { Loader2 } from 'lucide-react'
 import { useParams } from 'next/navigation'
-import React, { useState, useCallback } from 'react'
+import React, { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
@@ -33,11 +33,9 @@ function Message() {
     parseStringMessages(INITIAL_MESSAGES)
   );
   const [isSuggestLoading, setIsSuggestLoading] = useState(false);
-  const [currentMessage, setCurrentMessage] = useState('');
 
   const fetchSuggestedMessages = async () => {
     setIsSuggestLoading(true);
-    setCurrentMessage('');
     setMessages([]);
 
     try {
@@ -49,7 +47,6 @@ function Message() {
 
       const reader = response.body.getReader();
       const decoder = new TextDecoder();
-      let fullText = '';
       let currentPartial = '';
 
       while (true) {
@@ -58,7 +55,6 @@ function Message() {
         if (done) break;
         
         const chunk = decoder.decode(value, { stream: true });
-        fullText += chunk;
         currentPartial += chunk;
 
         // Check for complete messages

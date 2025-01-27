@@ -4,8 +4,8 @@ import dbConnect from "@/lib/dbConnect";
 import UserModel from "@/model/User";
 import { User } from "next-auth";
 
-export async function DELETE(request: Request, { params }: { params: { messageId: string } }) {
-    const messageId = await params.messageId
+export async function DELETE(request: Request, { params }: { params: Promise<{ messageId: string }> }) {
+    const messageId = (await params).messageId
 
     await dbConnect();
 
@@ -42,7 +42,7 @@ export async function DELETE(request: Request, { params }: { params: { messageId
             { status: 200 }
         )
     } catch (error) {
-        console.log("Error in deleting message route.")
+        console.log("Error in deleting message route. Error: ", error);
         return Response.json({
             success: false,
             message: "Unexpected error while deleting message"

@@ -53,7 +53,7 @@ function Dashboard() {
     } finally {
       setIsSwitchLoading(false)
     }
-  }, [setValue])
+  }, [setValue, toast])
 
   const fetchMessages = useCallback(async (refresh: boolean = false) => {
     setIsLoading(true)
@@ -78,7 +78,7 @@ function Dashboard() {
       setIsLoading(false)
       setIsSwitchLoading(false)
     }
-  }, [setIsLoading, setMessages])
+  }, [setIsLoading, setMessages, toast])
 
   useEffect(() => {
     if (!session || !session.user) return
@@ -192,7 +192,7 @@ function Dashboard() {
       </Button>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6 ">
         {messages.length > 0 ? (
-          messages.map((message, index) => (
+          messages.map((message) => (
             <MessageCard
               key={message._id as string}
               message={message}

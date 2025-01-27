@@ -39,7 +39,7 @@ function VerifyOtpPage() {
     } catch (error) {
       console.error("Error verifying user ", error)
       const axiosError = error as AxiosError<ApiResponse>
-      let errorMessage = axiosError.response?.data.message ?? "Error verifying user"
+      const errorMessage = axiosError.response?.data.message ?? "Error verifying user"
       toast({
         title: "Verification failed",
         description: errorMessage,

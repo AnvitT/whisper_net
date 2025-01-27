@@ -20,10 +20,8 @@ async function generateAIContent() {
 
     const stream = new ReadableStream({
         async start(controller) {
-            let fullText = ''
             for await (const chunk of result.stream) {
                 const chunkText = chunk.text()
-                fullText += chunkText
                 controller.enqueue(new TextEncoder().encode(chunkText))
             }
             controller.close()
@@ -34,7 +32,7 @@ async function generateAIContent() {
     });
 }
 
-export async function POST(req: Request) {
+export async function POST() {
     try {
         return await generateAIContent();
     } catch (error) {
