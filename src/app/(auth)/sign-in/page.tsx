@@ -31,9 +31,16 @@ function SignIn() {
       password: data.password
     })
     if (response?.error) {
+      let errorMessage = "Incorrect username or password"
+      if (response.error.trim() === "Error: No user found") {
+        errorMessage = "No user found"
+      }
+      if (response.error.trim() === "Error: User not verified") {
+        errorMessage = "User not verified"
+      }
       toast({
         title: "Login failed",
-        description: "Incorrect username or password",
+        description: errorMessage,
         variant: "destructive"
       })
     }
