@@ -1,5 +1,5 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -11,10 +11,12 @@ import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { signIn } from 'next-auth/react'
+import { Loader2 } from 'lucide-react'
 
 function SignIn() {
   const { toast } = useToast()
   const router = useRouter()
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
@@ -25,6 +27,7 @@ function SignIn() {
   })
 
   const onSubmit = async (data: z.infer<typeof signInSchema>) => {
+    setIsSubmitting(true)
     const response = await signIn('credentials', {
       redirect: false,
       identifier: data.identifier,
@@ -47,6 +50,7 @@ function SignIn() {
     if (response?.url) {
       router.replace('/dashboard')
     }
+    setIsSubmitting(false)
   }
 
   return (
@@ -86,8 +90,15 @@ function SignIn() {
                 </FormItem>
               )}
             />
-            <Button type="submit">
-              Sign In
+            <Button type="submit" disabled={isSubmitting}>
+              {
+                isSubmitting ? (
+                  <>
+                    <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                    Please wait
+                  </>
+                ) : ("Sign In")
+              }
             </Button>
           </form>
         </Form>
