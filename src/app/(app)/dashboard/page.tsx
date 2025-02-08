@@ -117,16 +117,15 @@ function Dashboard() {
 
   const copyToClipboard = () => {
     if (navigator.clipboard) {
+      try {
         navigator.clipboard.writeText(profileUrl)
-        .then(() => {
-            toast({
-                title: "Url copied",
-                description: "Profile Url has been copied to your clipboard."
-            });
-        })
-        .catch(err => {
-            console.error('Failed to copy: ', err);
+        toast({
+          title: "Url copied",
+          description: "Profile Url has been copied to your clipboard."
         });
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+      }
     } else {
         // Fallback method for older browsers
         const textArea = document.createElement("textarea");

@@ -38,8 +38,9 @@ Follow these instructions to set up the project locally.
         ```env
         NEXTAUTH_SECRET=your-secret
         MONGODB_URI=your-mongodb-uri
-        RESEND_API_KEY=your-resend-api-key
         GEMINI_API_KEY=your-gemini-api-key
+        EMAIL_USER=your-email
+        EMAIL_APP_PASSWORD=your-email-app-password
         ```
 
 4. Run the development server:
