@@ -1,3 +1,5 @@
+import { Toaster } from "@/components/ui/toaster"
+
 export const metadata = {
   title: 'Whisper Net',
   description: 'Whisper Net - Where your identity remains a secret.',
@@ -10,7 +12,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        {children}
+        < Toaster />
+      </body>
     </html>
   )
 }
