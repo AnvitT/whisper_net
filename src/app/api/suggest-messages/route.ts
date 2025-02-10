@@ -1,19 +1,21 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-async function generateAIContent() {
+async function generateAIContent(userPrompt: string) {
     const genAI = new GoogleGenerativeAI(String(process.env.GEMINI_API_KEY))
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" })
 
     const aiPrompt = `
-    Create a list of three open-ended and engaging questions formatted as a single string.
-    Each question should be separated by '||'.
-    These questions are for an anonymous social messaging platform, like Qooh.me,
-    and should be suitable for a diverse audience.
-    Avoid personal or sensitive topics focusing instead on universal themes that encourage friendly interation.
-    For example, your output should be structured like this:
-    'What's a hobby you've recently started?||If you could have dinner with any historical figure, who would it be?||What's a simple thing that makes you happy?'.
-    Ensure the questions are intriguing, foster curiosity, and contribute to a positive and welcoming conversational environment.
-    Maximum words in each questions MUST BE 10 words.
+        You are an advanced AI agent. Your task is to generate random messages for a anonymous messaging platform.
+        Messages should not more than 20 words. The messages should be engaging and friendly.
+        Generate 3 random messages and format them as a single string separated by '||'.
+        Messages should cater to a wide audience and should not be offensive.
+        The messages should not expect an answer as this is just a one way communication.
+        I will give userPrompt if it is empty do nothing. If the user prompt is not empty, the if it has some meaning,
+        then try to generate messages based on the user prompt.
+        userPrompt: ${userPrompt}
+        For example, your output should be structured like this:
+        'message1||message2||message3'.
+        Thanks for your help!
     `;
 
     const result = await model.generateContentStream(aiPrompt)
@@ -32,9 +34,10 @@ async function generateAIContent() {
     });
 }
 
-export async function POST() {
+export async function POST(request: Request) {
     try {
-        return await generateAIContent();
+        const { userPrompt } = await request.json();
+        return await generateAIContent(userPrompt);
     } catch (error) {
         console.error("An unexpected error occurred. ", error);
         return new Response(JSON.stringify({ error: "An unexpected error occurred." }), {

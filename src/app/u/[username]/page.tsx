@@ -39,7 +39,13 @@ function Message() {
     setMessages([]);
 
     try {
-      const response = await fetch('/api/suggest-messages', { method: 'POST' });
+      const response = await fetch('/api/suggest-messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ userPrompt: messageContent?.trim() })
+      });
       
       if (!response.body) {
         throw new Error('No response body');
