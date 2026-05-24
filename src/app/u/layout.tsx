@@ -1,21 +1,16 @@
-import { Toaster } from "@/components/ui/toaster"
-
 export const metadata = {
   title: "Whisper Net",
   description: "Whisper Net - Where your identity remains a secret.",
 }
 
-export default function RootLayout({
+export default function PublicLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body>
-        {children}
-        <Toaster />
-      </body>
-    </html>
+    <div className="flex flex-col min-h-screen">
+      {children}
+    </div>
   )
 }

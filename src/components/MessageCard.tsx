@@ -40,13 +40,13 @@ function MessageCard({ message, onMessageDelete }: MessageCardProps) {
     }
 
     return (
-        <Card className="card-bordered relative">
+        <Card className="glass-panel relative border-white/10 hover:border-white/20 transition-all shadow-xl hover:-translate-y-1 duration-300">
             <CardHeader>
-                <CardTitle className="pr-10">{message.content}</CardTitle>
+                <CardTitle className="pr-10 text-white/90 font-medium leading-relaxed">{message.content}</CardTitle>
                     <AlertDialog>
                         <AlertDialogTrigger asChild>
-                            <Button variant='destructive' className="absolute top-0 right-0 m-2">
-                                <X className="w-5 h-5" />
+                            <Button variant='destructive' size="icon" className="absolute top-3 right-3 opacity-60 hover:opacity-100 transition-opacity w-8 h-8 bg-red-500/20 hover:bg-red-500 text-red-200 hover:text-white border border-red-500/30">
+                                <X className="w-4 h-4" />
                             </Button>
                         </AlertDialogTrigger>
                         <AlertDialogContent>

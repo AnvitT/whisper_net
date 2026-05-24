@@ -13,13 +13,14 @@ import { ApiResponse } from '@/types/ApiResponse'
 import { Form, FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Loader2 } from 'lucide-react'
+import { Loader2, Eye, EyeOff } from 'lucide-react'
 
 function SignUp() {
   const [username, setUsername] = useState('')
   const [usernameMessage, setUsernameMessage] = useState('')
   const [isCheckingUsername, setIsCheckingUsername] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const debouncedUsername = useDebounceCallback(setUsername, 300)
   const { toast } = useToast()
@@ -77,13 +78,13 @@ function SignUp() {
   }
 
   return (
-    <div className='flex justify-center items-center min-h-screen bg-gray-100'>
-      <div className='w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md'>
+    <div className='flex justify-center items-center min-h-screen gradient-bg animate-gradient'>
+      <div className='w-full max-w-md p-8 space-y-8 glass-panel text-white'>
         <div className='text-center'>
-          <h1 className='text-4xl font-extrabold tracking-tight lg:text-5xl mb-6'>
+          <h1 className='text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 text-glow'>
             Join Whisper Net  
           </h1>
-          <p className='mb-4'>Sign up to start anonymous messaging to your friends</p>
+          <p className='mb-4 text-white/80'>Sign up to start anonymous messaging to your friends</p>
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
@@ -94,7 +95,7 @@ function SignUp() {
                 <FormItem>
                   <FormLabel className='font-bold'>Username</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter username" {...field}
+                    <Input className="bg-black/20 border-white/20 text-white placeholder:text-white/50 focus-visible:ring-primary" placeholder="Enter username" {...field}
                       onChange={(e) => {
                         field.onChange(e)
                         debouncedUsername(e.target.value)
@@ -115,7 +116,7 @@ function SignUp() {
                 <FormItem>
                   <FormLabel className='font-bold'>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter email" {...field} />
+                    <Input className="bg-black/20 border-white/20 text-white placeholder:text-white/50 focus-visible:ring-primary" placeholder="Enter email" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -128,13 +129,31 @@ function SignUp() {
                 <FormItem>
                   <FormLabel className='font-bold'>Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter password" {...field} />
+                    <div className="relative">
+                      <Input 
+                        className="bg-black/20 border-white/20 text-white placeholder:text-white/50 focus-visible:ring-primary"
+                        type={showPassword ? "text" : "password"} 
+                        placeholder="Enter password" 
+                        {...field} 
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-white/50 hover:text-white"
+                      >
+                        {showPassword ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button type="submit" disabled={isSubmitting}>
+            <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/20 transition-all" type="submit" disabled={isSubmitting}>
               {
                 isSubmitting ? (
                   <>
@@ -146,10 +165,10 @@ function SignUp() {
             </Button>
           </form>
         </Form>
-        <div className='text-center mt-4'>
+        <div className='text-center mt-4 text-white/80'>
           <p>
             Already a member?{' '}
-            <Link href="/sign-in" className='text-blue-600 hover:text-blue-800'>Sign In</Link>
+            <Link href="/sign-in" className='text-primary hover:text-primary/80 underline font-medium'>Sign In</Link>
           </p>
         </div>
       </div> 

@@ -146,48 +146,48 @@ function Dashboard() {
   }
   
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto rounded max-w-6xl bg-white">
-      <h1 className="text-4xl font-bold mb-4">User Dashboard</h1>
+    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 md:p-8 rounded-2xl max-w-6xl glass-panel text-white shadow-2xl flex-grow">
+      <h1 className="text-4xl font-extrabold tracking-tight mb-8 text-glow">User Dashboard</h1>
 
-      <div className="mb-4">
-        <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{' '}
+      <div className="mb-8 bg-white/5 p-4 rounded-xl border border-white/10">
+        <h2 className="text-lg font-semibold mb-4 text-white/90">Copy Your Unique Link</h2>{' '}
         <div className="flex items-center">
           <input
             type="text"
             value={profileUrl}
             disabled
-            className="input input-bordered w-full p-2 mr-2"
+            className="w-full p-3 mr-2 bg-black/20 border border-white/20 rounded-md text-white/80 focus:outline-none"
           />
-          <Button onClick={copyToClipboard}>Copy</Button>
+          <Button onClick={copyToClipboard} className="bg-primary hover:bg-primary/90">Copy</Button>
         </div>
       </div>
 
-      <div className="mb-4 flex items-center">
+      <div className="mb-8 flex items-center bg-white/5 p-4 rounded-xl border border-white/10">
         <Switch
           {...register('acceptMessages')}
           checked={acceptMessages}
           onCheckedChange={handleSwitchChange}
           disabled={isSwitchLoading}
         />
-        <span className="ml-2">
-          Accept Messages: {acceptMessages ? 'On' : 'Off'}
+        <span className="ml-4 font-medium">
+          Accept Messages: <span className={acceptMessages ? "text-green-400" : "text-red-400"}>{acceptMessages ? 'On' : 'Off'}</span>
         </span>
       </div>
-      <Separator />
+      <Separator className="bg-white/10" />
 
       <Button
-        className="mt-4"
-        variant="outline"
+        className="mt-6 mb-4 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/20 transition-all border-none"
         onClick={(e) => {
           e.preventDefault();
           fetchMessages(true);
         }}
       >
         {isLoading ? (
-          <Loader2 className="h-4 w-4 animate-spin" />
+          <Loader2 className="h-4 w-4 animate-spin mr-2" />
         ) : (
-          <RefreshCcw className="h-4 w-4" />
+          <RefreshCcw className="h-4 w-4 mr-2" />
         )}
+        Refresh Messages
       </Button>
       <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-6 ">
         {messages.length > 0 ? (

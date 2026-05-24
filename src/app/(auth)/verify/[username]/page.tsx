@@ -142,13 +142,13 @@ function VerifyOtpPage() {
   }
 
   return (
-    <div className='flex justify-center items-center min-h-screen bg-gray-100'>
-      <div className='w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md'>
+    <div className='flex justify-center items-center min-h-screen gradient-bg animate-gradient'>
+      <div className='w-full max-w-md p-8 space-y-8 glass-panel text-white'>
         <div className='text-center'>
-          <h1 className='text-4xl font-extrabold tracking-tight lg:text-5xl mb-6'>
+          <h1 className='text-4xl font-extrabold tracking-tight lg:text-5xl mb-6 text-glow'>
             Verify your Account
           </h1>
-          <p className='mb-4'>Enter the verification code sent to your email</p>
+          <p className='mb-4 text-white/80'>Enter the verification code sent to your email</p>
         </div>
 
         <Form {...form}>
@@ -164,7 +164,7 @@ function VerifyOtpPage() {
                   onChange={(e) => handleOtpChange(index, e.target.value)}
                   onKeyDown={(e) => handleKeyDown(index, e)}
                   onPaste={handlePaste}
-                  className="w-12 h-12 text-center text-lg font-semibold border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+                  className="w-12 h-12 text-center text-lg font-semibold border border-white/20 bg-black/20 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:bg-black/40 transition-all"
                 />
               ))}
             </div>
@@ -174,7 +174,7 @@ function VerifyOtpPage() {
               </p>
             )}
             <div className="space-y-4">
-              <Button type="submit" className="w-full" disabled={isVerifying}>
+              <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/20 transition-all" disabled={isVerifying}>
                 {isVerifying ?
                   <>
                     <Loader2 className='mr-2 h-4 w-4 animate-spin' />
@@ -187,7 +187,7 @@ function VerifyOtpPage() {
                   variant="ghost"
                   onClick={handleResend}
                   disabled={isResendDisabled || isResending}
-                  className="text-sm w-full"
+                  className="text-sm w-full hover:bg-white/10 text-white/80 hover:text-white"
                 >
                   {isResending 
                     ? <>

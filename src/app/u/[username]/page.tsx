@@ -129,10 +129,14 @@ function Message() {
   };
 
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded max-w-6xl">
-      <h1 className="text-4xl font-bold mb-1">Whisper Net</h1>
-      <h1 className="text-2xl font-bold mb-4">Where your identity remains a secret.</h1>
-      <p className="mb-4">Send a message to {params.username}</p>
+    <div className="my-12 mx-4 md:mx-8 lg:mx-auto p-6 md:p-10 glass-panel text-white rounded-2xl max-w-4xl shadow-2xl flex-grow flex flex-col justify-center animate-in fade-in zoom-in-95 duration-700">
+      <div className="text-center mb-8">
+        <h1 className="text-5xl font-extrabold tracking-tight mb-2 text-glow">Whisper Net</h1>
+        <h2 className="text-xl font-medium text-white/80 mb-4">Where your identity remains a secret.</h2>
+        <p className="text-lg bg-white/10 inline-block px-4 py-2 rounded-full border border-white/20">
+          Send a message to <span className="font-bold text-primary">{params.username}</span>
+        </p>
+      </div>
       
       <FormProvider {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -144,7 +148,7 @@ function Message() {
                 <FormControl>
                   <Textarea
                     placeholder="Write your anonymous message here"
-                    className="resize-none w-full max-w-full"
+                    className="resize-none w-full max-w-full bg-black/20 border-white/20 text-white placeholder:text-white/50 focus-visible:ring-primary min-h-[120px] p-4 text-lg"
                     {...field}
                   />
                 </FormControl>
@@ -152,14 +156,14 @@ function Message() {
               </FormItem>
             )}
           />
-          <div className="flex justify-center">
+          <div className="flex justify-center mt-6">
             {isSubmitting ? (
-              <Button disabled>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              <Button disabled className="bg-primary/50 text-white w-full md:w-auto px-8 py-6 text-lg rounded-xl">
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                 Please wait
               </Button>
             ) : (
-              <Button type="submit" disabled={isSubmitting || !messageContent}>
+              <Button type="submit" disabled={isSubmitting || !messageContent} className="w-full md:w-auto bg-primary hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/20 px-8 py-6 text-lg rounded-xl">
                 Send It
               </Button>
             )}
@@ -168,27 +172,28 @@ function Message() {
       </FormProvider>
       
       <div className="space-y-4 my-8">
-        <div className="space-y-2">
+        <div className="space-y-2 text-center">
           <Button
             onClick={fetchSuggestedMessages}
-            className="my-4"
+            className="my-4 bg-white/10 hover:bg-white/20 text-white border-white/20 shadow-md"
+            variant="outline"
             disabled={isSuggestLoading}
           >
             {isSuggestLoading ? 'Loading...' : 'Suggest Messages'}
           </Button>
-          <p>Click on any message below to select it.</p>
+          <p className="text-white/70">Click on any message below to select it.</p>
         </div>
         
-        <Card>
+        <Card className="glass-panel border-white/10 bg-black/20">
           <CardHeader>
-            <h3 className="text-xl font-semibold">Messages</h3>
+            <h3 className="text-xl font-semibold text-white">Suggested Messages</h3>
           </CardHeader>
           <CardContent className="flex flex-col space-y-4">
             {messages.map((message, index) => (
               <Button
                 key={index}
                 variant="outline"
-                className="mb-2 break-words whitespace-pre-wrap p-6 min-h-[3rem]"
+                className="mb-2 break-words whitespace-pre-wrap p-4 min-h-[3rem] bg-white/5 hover:bg-white/10 text-left justify-start border-white/10 h-auto text-white/90 font-normal shadow-sm transition-all"
                 onClick={() => handleMessageClick(message)}
               >
                 {message}
